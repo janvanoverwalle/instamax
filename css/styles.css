@@ -1,0 +1,96 @@
+header {
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    background-color: white;
+}
+
+.header-image {
+    height: 4em;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.prev-post,
+.next-post {
+    cursor: pointer;
+}
+
+.video {
+    position: relative;
+}
+
+.volume-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 80;
+    float: right;
+    /* Source: https://codepen.io/sosuke/pen/Pjoqqp */
+    filter: invert(100%) sepia(0%) saturate(1332%) hue-rotate(119deg) brightness(117%) contrast(100%);
+    padding: 4px;
+    background-color: lightgrey;
+    border-radius: 12px;
+    opacity: 0.8;
+}
+
+.stats {
+    display: flex;
+}
+
+.stats > :not(:first-child) {
+    margin-left: 1em;
+}
+
+.post-date {
+    font-size: small;
+}
+
+.overview-grid {
+    max-width: 1200px;
+}
+
+.sort-date {
+    cursor: pointer;
+    margin-top: 1em;
+}
+
+.scroll-to-top {
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: grey; /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 4px 14px 10px 14px; /* Some padding */
+    border-radius: 32px; /* Rounded corners */
+    font-size: 26px; /* Increase font size */
+}
+
+.scroll-to-top:hover {
+  background-color: skyblue; /* Add a dark-grey background on hover */
+}
+
+.thumbnail-row {
+    margin: 0;
+}
+
+.thumbnail-column {
+    padding: 0;
+}
+
+.thumbnail-container {
+    padding: .1em;
+    height: 200px;
+    width: 200px;
+    overflow: hidden; 
+}
+
+.thumbnail {
+    object-fit: cover;
+}
