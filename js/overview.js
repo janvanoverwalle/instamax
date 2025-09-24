@@ -86,7 +86,7 @@ function createThumbnail(post, column) {
     let mediaElement;
     if (post.filename.endsWith('.mp4')) {
         const source = document.createElement('source');
-        source.setAttribute('src', 'data/' + post.filename);
+        source.setAttribute('src', 'data/videos/' + post.filename);
         source.setAttribute('type', 'video/mp4');
 
         const text = document.createTextNode('Your browser does not support the video tag.');
@@ -99,7 +99,7 @@ function createThumbnail(post, column) {
     }
     else {
         mediaElement = document.createElement('img');
-        mediaElement.setAttribute('src', 'data/' + post.filename);
+        mediaElement.setAttribute('src', 'data/images/' + post.filename);
         mediaElement.setAttribute('alt', post.filename.split('.').slice(0, -1).join());
     }
 

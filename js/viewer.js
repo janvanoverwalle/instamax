@@ -88,7 +88,7 @@ function displayImage(imageFilename) {
     imageContainer.replaceChildren();
 
     const img = document.createElement('img');
-    img.setAttribute('src', 'data/' + imageFilename);
+    img.setAttribute('src', 'data/images/' + imageFilename);
     img.setAttribute('alt', imageFilename.split('.').slice(0, -1).join());
     img.setAttribute('width', '100%');
     img.classList.add('rounded');
@@ -102,7 +102,7 @@ function displayVideo(videoFilename) {
     videoContainer.replaceChildren();
 
     const source = document.createElement('source');
-    source.setAttribute('src', 'data/' + videoFilename);
+    source.setAttribute('src', 'data/videos/' + videoFilename);
     source.setAttribute('type', 'video/mp4');
 
     const text = document.createTextNode('Your browser does not support the video tag.');
