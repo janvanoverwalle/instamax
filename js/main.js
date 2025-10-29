@@ -4,6 +4,11 @@ function onWindowLoad() {
     // document.querySelector('.header-image').addEventListener('click', displayPreviousPost);
 }
 
+function getUrlParam(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}
+
 function findPostById(postId, offset) {
     let index = POSTS_INFO.findIndex((p) => p.post_id === String(postId));
     if (offset !== undefined) {

@@ -1,6 +1,11 @@
-window.onload = onWindowLoad;
+window.addEventListener('load', initOverview);
 
-function onWindowLoad() {
+function initOverview() {
+    document.querySelector('.header-image').addEventListener('click', () => {
+        console.log(window.location);
+        window.location.href = window.location.href.split('?')[0];
+    });
+
     sortPosts('asc');
 
     const grid = document.querySelector('.overview-grid');
@@ -27,7 +32,7 @@ function onWindowLoad() {
         sortPosts(direction);
         e.target.setAttribute('alt', 'sort-' + direction);
         e.target.setAttribute('title', 'Sort ' + (isAscending ? 'oldest' : 'newest') + ' first');
-        e.target.setAttribute('src', 'assets/icons/sort-numeric-' + (isAscending ? 'up' : 'down') + '.svg');
+        e.target.setAttribute('src', 'assets/icons/sort-alpha-' + (isAscending ? 'up' : 'down') + '.svg');
 
         document.querySelector('.thumbnail-row').replaceChildren();
         loadAdditionalPosts(60);
@@ -40,8 +45,7 @@ function onWindowLoad() {
 }
 
 function loadAdditionalPosts(numToLoad, start) {
-    const urlParams = new URLSearchParams(window.location.search);
-    const tag = urlParams.get('tag');
+    const tag = getUrlParam('tag');
     const row = document.querySelector('.thumbnail-row');
     for (let i = (start ?? 0); i < POSTS_INFO.length; i++) {
         if (tag && !POSTS_INFO[i].description.includes(tag)) {
@@ -108,7 +112,13 @@ function createThumbnail(post, column) {
     mediaElement.classList.add('thumbnail', 'rounded', 'shadow-sm');
 
     const a = document.createElement('a');
-    a.href = 'viewer.html?post_id=' + post.post_id;
+    if (typeof displayPost !== 'undefined') {
+        a.classList.add('clickable');
+        a.addEventListener('click', () => onPostClick(post.post_id));
+    }
+    else {
+        a.href = 'viewer.html?post-id=' + post.post_id;
+    }
     a.appendChild(mediaElement);
 
     const container = document.createElement('div');
@@ -120,4 +130,10 @@ function createThumbnail(post, column) {
     }
 
     return container;
+}
+
+function onPostClick(postId) {
+    const post = findPostById(postId)
+    displayPost(post);
+    updatePostNavigation(post);
 }
