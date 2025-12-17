@@ -6,15 +6,12 @@ function initOverview() {
         window.location.href = window.location.href.split('?')[0];
     });
 
-    sortPosts('asc');
-
-    const grid = document.querySelector('.overview-grid');
-    createRow(grid);
+    sortPosts(getCurrentSortDirection());
     loadAdditionalPosts(60);
 
     document.addEventListener('scroll', () => {
         if ((window.innerHeight + Math.ceil(window.pageYOffset + 1)) >= document.body.offsetHeight) {
-            loadAdditionalPosts(60, document.querySelectorAll('.thumbnail-column').length);
+            loadAdditionalPosts(60, document.querySelectorAll('.thumbnail-container').length);
         }
 
         const scrollToTopThreshold = 50;
@@ -34,7 +31,7 @@ function initOverview() {
         e.target.setAttribute('title', 'Sort ' + (isAscending ? 'oldest' : 'newest') + ' first');
         e.target.setAttribute('src', 'assets/icons/sort-alpha-' + (isAscending ? 'up' : 'down') + '.svg');
 
-        document.querySelector('.thumbnail-row').replaceChildren();
+        document.querySelector('.overview-grid').replaceChildren();
         loadAdditionalPosts(60);
     });
 
@@ -44,49 +41,37 @@ function initOverview() {
     });
 }
 
+function getCurrentSortDirection() {
+    const sortButton = document.querySelector('.sort-date');
+    return sortButton.getAttribute('alt').includes('asc') ? 'asc' : 'desc';
+}
+
 function loadAdditionalPosts(numToLoad, start) {
     const tag = getUrlParam('tag');
-    const row = document.querySelector('.thumbnail-row');
+    const grid = document.querySelector('.overview-grid');
+    let postsCreated = 0;
     for (let i = (start ?? 0); i < POSTS_INFO.length; i++) {
         if (tag && !POSTS_INFO[i].description.includes(tag)) {
             continue;
         }
 
-        const column = createColumn(row, null);
-        createThumbnail(POSTS_INFO[i], column);
+        if (createThumbnail(POSTS_INFO[i], grid)) {
+            postsCreated++;
+        }
 
         // Only show a subset during dev
-        if ((i-(start ?? 0)) === (numToLoad-1)) {
+        if ((postsCreated-(start ?? 0)) === numToLoad) {
             break;
         }
     }
 }
 
-function createRow(parent) {
-    const row = document.createElement('div');
-    row.classList.add('row', 'thumbnail-row');
-    if (parent) {
-        parent.appendChild(row);
-    }
-    return row;
-}
-
-function createColumn(row, width) {
-    const col = document.createElement('div');
-    if (width === null) {
-        col.classList.add('col');
-    }
-    else {
-        col.classList.add('col-' + (width ?? 2));
-    }
-    col.classList.add('thumbnail-column');
-    if (row) {
-        row.appendChild(col);
-    }
-    return col;
-}
-
 function createThumbnail(post, column) {
+    const albumIdentifier = getAlbumIdentifier(post.post_id);
+    if (document.querySelector('.thumbnail-container.p' + albumIdentifier)) {
+        return;
+    }
+
     let mediaElement;
     if (post.filename.endsWith('.mp4')) {
         const source = document.createElement('source');
@@ -122,8 +107,18 @@ function createThumbnail(post, column) {
     a.appendChild(mediaElement);
 
     const container = document.createElement('div');
-    container.classList.add('thumbnail-container');
+    container.classList.add('thumbnail-container', 'p' + albumIdentifier);
     container.appendChild(a);
+
+    const albumPosts = findPostsFromSameAlbum(post.post_id);
+    if (albumPosts.length > 1) {
+        const albumIcon = document.createElement('img');
+        albumIcon.setAttribute('width', '32');
+        albumIcon.setAttribute('src', 'assets/icons/files.svg');
+        albumIcon.setAttribute('alt', 'album');
+        albumIcon.classList.add('album-icon');
+        container.appendChild(albumIcon);
+    }
 
     if (column) {
         column.appendChild(container);

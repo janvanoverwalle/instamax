@@ -4,10 +4,16 @@
 }
 
 header {
+    display: flex;
+    justify-content: space-between;
     position: sticky;
     top: 0;
     z-index: 90;
     background-color: white;
+}
+
+header > .banner-item {
+    margin: auto 2em;
 }
 
 .header-image {
@@ -16,6 +22,40 @@ header {
 
 .clickable {
     cursor: pointer;
+}
+
+.overview-grid {
+    /* max-width: 1300px; */
+    display: flex;
+    flex-wrap: wrap;
+    gap: .2em;
+    justify-content: center;
+    align-items: space-evenly;
+    align-content: center;
+}
+
+.thumbnail-container {
+    height: 200px;
+    width: 200px;
+    overflow: hidden; 
+}
+
+.thumbnail {
+    object-fit: cover;
+}
+
+.album-icon {
+    position: relative;
+    bottom: 190px;
+    right: 10px;
+    z-index: 60;
+    float: right;
+    /* Source: https://codepen.io/sosuke/pen/Pjoqqp */
+    filter: invert(100%) sepia(0%) saturate(1332%) hue-rotate(119deg) brightness(117%) contrast(100%);
+    padding: 4px;
+    background-color: lightgrey;
+    border-radius: 12px;
+    opacity: 0.6;
 }
 
 .post-overlay-container {
@@ -29,19 +69,66 @@ header {
     background-color: rgba(0,0,0,0.6);
     z-index: 100;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
 
 .post-overlay-frame {
+    max-width: 90vw;
     padding: 1em 0 2em 0;
     height: auto;
     background-color: white;
     border-radius: 16px;
+    display: flex;
+    flex-direction: column;
 }
 
 .close-overlay {
     margin-right: 1em;
+    align-self: flex-end;
+}
+
+.post-overlay-content {
+    padding: 0 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 1em;
+}
+
+.post-media {
+    display: flex;
+    flex-direction: column;
+    flex: 2 1 65%;
+}
+
+.media-content {
+    display: flex;
+    justify-content: center;
+}
+
+.media-data.multi {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: 50vh;
+    padding-right: .5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+.post-description {
+    padding: 0 1.5em;
+    align-self: flex-start;
+    flex: 1 1 35%;
+}
+
+.post-description .description {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: 50vh;
+    padding-right: .5rem;
 }
 
 .close-post-overlay,
@@ -51,33 +138,56 @@ header {
 }
 
 @media only screen and (max-width: 576px) {
+    .post-overlay-content {
+        flex-wrap: wrap;
+    }
     .media-item {
-        width: 200px;
+        max-width: 400px;
+    }
+    .post-media,
+    .post-description {
+        flex: 0 0 100%;
+        max-width: 100%;
     }
 }
 @media only screen and (min-width: 576px) {
     .media-item {
-        width: 250px;
+        max-width: 250px;
     }
 }
 @media only screen and (min-width: 768px) {
+    .post-overlay-frame {
+        max-width: 80vw;
+    }
     .media-item {
-        width: 300px;
+        max-width: 300px;
     }
 }
 @media only screen and (min-width: 1025px) {
+    .post-overlay-frame {
+        max-width: 70vw;
+    }
     .media-item {
-        width: 350px;
+        max-width: 350px;
+    .post-description .description {
+        max-height: 70vh;
+    }
     }
 }
 @media only screen and (min-width: 1200px) {
+    .post-overlay-frame {
+        max-width: 60vw;
+    }
     .media-item {
-        width: 400px;
+        max-width: 400px;
     }
 }
 @media only screen and (min-width: 1500px) {
+    .post-overlay-frame {
+        max-width: 50vw;
+    }
     .media-item {
-        width: 500px;
+        max-width: 500px;
     }
 }
 
@@ -111,10 +221,6 @@ header {
     font-size: small;
 }
 
-.overview-grid {
-    max-width: 1200px;
-}
-
 .sort-date {
     cursor: pointer;
     margin-top: 1em;
@@ -137,23 +243,4 @@ header {
 
 .scroll-to-top:hover {
   background-color: skyblue; /* Add a dark-grey background on hover */
-}
-
-.thumbnail-row {
-    margin: 0;
-}
-
-.thumbnail-column {
-    padding: 0;
-}
-
-.thumbnail-container {
-    padding: .1em;
-    height: 200px;
-    width: 200px;
-    overflow: hidden; 
-}
-
-.thumbnail {
-    object-fit: cover;
 }

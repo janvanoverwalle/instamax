@@ -6,7 +6,7 @@ function initOverlay() {
     document.querySelector('.close-post-overlay').addEventListener('click', () => closePost());
     document.querySelector('.post-overlay-container').addEventListener('click', closePost);
 
-    document.addEventListener('keydown', function(event) {
+    document.addEventListener('keydown', function (event) {
         if (event.code == 'ArrowLeft') {
             displayPreviousPost();
         }
@@ -38,22 +38,11 @@ function displayPost(post) {
 
     // document.title = document.title.split('-', 2)[0] + '- ' + (post.description ?? 'Post');
 
-    if (post.filename.endsWith('.mp4')) {
-        try {
-            displayVideo(post.filename);
-        }
-        catch {
-            console.error('Failed to display video: ' + post.filename);
-        }
-    }
-    else {
-        try {
-            displayImage(post.filename);
-        }
-        catch {
-            console.error('Failed to display image: ' + post.filename);
-        }
-    }
+    const albumPosts = findPostsFromSameAlbum(post.post_id);
+    albumPosts.forEach((p) => displayMedia(p, false));
+    const mediaData = document.querySelector('.media-data');
+    mediaData.scrollTop = 0;
+    mediaData.classList.toggle('multi', albumPosts.length > 1);
 
     try {
         displayDescription(post.description);
@@ -116,21 +105,36 @@ function updatePostNavigation(post) {
 }
 
 function clearMedia() {
-    const image = document.querySelector('.image');
-    if (image) {
-        image.replaceChildren();
-    }
-
-    const video = document.querySelector('.video');
-    if (video) {
-        video.replaceChildren();
+    const media = document.querySelector('.media-data');
+    if (media) {
+        media.replaceChildren();
     }
 }
 
-function displayImage(imageFilename) {
-    document.querySelector('.video').replaceChildren();
-    const imageContainer = document.querySelector('.image');
-    imageContainer.replaceChildren();
+function displayMedia(post, clearOld = true) {
+    if (post.filename.endsWith('.mp4')) {
+        try {
+            displayVideo(post.filename, clearOld);
+        }
+        catch {
+            console.error('Failed to display video: ' + post.filename);
+        }
+    }
+    else {
+        try {
+            displayImage(post.filename, clearOld);
+        }
+        catch {
+            console.error('Failed to display image: ' + post.filename);
+        }
+    }
+}
+
+function displayImage(imageFilename, clearOld = true) {
+    const mediaContainer = document.querySelector('.media-data');
+    if (clearOld) {
+        mediaContainer.replaceChildren();
+    }
 
     const img = document.createElement('img');
     img.setAttribute('src', 'data/images/' + imageFilename);
@@ -138,13 +142,14 @@ function displayImage(imageFilename) {
     // img.setAttribute('width', '512px');
     img.classList.add('rounded', 'media-item');
 
-    imageContainer.appendChild(img);
+    mediaContainer.appendChild(img);
 }
 
-function displayVideo(videoFilename) {
-    document.querySelector('.image').replaceChildren();
-    const videoContainer = document.querySelector('.video');
-    videoContainer.replaceChildren();
+function displayVideo(videoFilename, clearOld = true) {
+    const mediaContainer = document.querySelector('.media-data');
+    if (clearOld) {
+        mediaContainer.replaceChildren();
+    }
 
     const source = document.createElement('source');
     source.setAttribute('src', 'data/videos/' + videoFilename);
@@ -188,10 +193,13 @@ function displayVideo(videoFilename) {
                 video.muted = !video.muted;
             });
         }
+        else {
+            mute.classList.add('d-none');
+        }
     });
 
-    videoContainer.appendChild(video);
-    videoContainer.appendChild(mute);
+    mediaContainer.appendChild(video);
+    mediaContainer.appendChild(mute);
 }
 
 function displayComments(comments) {
@@ -226,8 +234,8 @@ function highlightTags(description) {
 
 function displayDate(filename) {
     const dateString = filename.split('_')[0];
-    const [ year, month, day ] = dateString.split('-');
-    const date = new Date(Number(year), Number(month)-1, Number(day));
+    const [year, month, day] = dateString.split('-');
+    const date = new Date(Number(year), Number(month) - 1, Number(day));
     var options = { year: 'numeric', month: 'long', day: 'numeric' };
     document.querySelector('.post-date').textContent = date.toLocaleDateString(undefined, options);
 }
@@ -235,13 +243,17 @@ function displayDate(filename) {
 function displayPreviousPost() {
     const container = getPostContainer();
     const postId = container.getAttribute('post-id');
-    const post = findPostById(postId, -1);
-    if (post) {
-        displayPost(post);
+    // const post = findPostById(postId, -1);
+    const album = findAlbumById(getAlbumIdentifier(postId), -1);
+    if (album) {
+        const post = album[0];
+        if (post) {
+            displayPost(post);
 
-        document.querySelector('.next-post').classList.remove('d-none');
-        if (findPostById(post.post_id, -1) === undefined) {
-            document.querySelector('.prev-post').classList.add('d-none');
+            document.querySelector('.next-post').classList.remove('d-none');
+            if (findPostById(post.post_id, -1) === undefined) {
+                document.querySelector('.prev-post').classList.add('d-none');
+            }
         }
     }
 }
@@ -249,13 +261,17 @@ function displayPreviousPost() {
 function displayNextPost() {
     const container = getPostContainer();
     const postId = container.getAttribute('post-id');
-    const post = findPostById(postId, 1);
-    if (post) {
-        displayPost(post);
+    // const post = findPostById(postId, 1);
+    const album = findAlbumById(getAlbumIdentifier(postId), 1);
+    if (album) {
+        const post = album[0];
+        if (post) {
+            displayPost(post);
 
-        document.querySelector('.prev-post').classList.remove('d-none');
-        if (findPostById(post.post_id, 1) === undefined) {
-            document.querySelector('.next-post').classList.add('d-none');
+            document.querySelector('.prev-post').classList.remove('d-none');
+            if (findPostById(post.post_id, 1) === undefined) {
+                document.querySelector('.next-post').classList.add('d-none');
+            }
         }
     }
 }
