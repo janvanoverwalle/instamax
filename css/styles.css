@@ -3,13 +3,45 @@
     overflow: hidden;
 }
 
+/* Theme variables: light by default, dark overrides when [data-theme="dark"] is set on <html> */
+:root {
+    --bg: #ffffff;
+    --text: #1f1f1f;
+    --card-bg: #ffffff;
+    --overlay-bg: rgba(0,0,0,0.6);
+    --icon: invert(0%);
+    --media-shadow: rgba(0, 0, 0, 0.3);
+    --scroll-track: #EBEBEB;
+    --scroll-track-active: #D6D6D6;
+    --scroll-thumb: #6F6F6F;
+    --scroll-thumb-active: #4F4F4F;
+}
+
+[data-theme="dark"] {
+    --bg: #121212;
+    --text: #e6e6e6;
+    --card-bg: #121212;
+    --overlay-bg: rgba(0,0,0,0.8);
+    --icon: invert(100%);
+    --media-shadow: rgba(255, 255, 255, 0.3);
+    --scroll-track: #202020;
+    --scroll-track-active: #2A2A2A;
+    --scroll-thumb: #909090;
+    --scroll-thumb-active: #b0b0b0;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+}
+
 header {
     display: flex;
     justify-content: space-between;
     position: sticky;
     top: 0;
     z-index: 90;
-    background-color: white;
+    background-color: var(--card-bg);
 }
 
 header > .banner-item {
@@ -20,8 +52,33 @@ header > .banner-item {
     height: 4em;
 }
 
+.header-icons {
+    display: flex;
+    align-items: end;
+}
+
+.theme-toggle {
+    margin: 0 .5em 2px 1em;
+}
+
+.bs-icon {
+    filter: var(--icon);
+}
+
 .clickable {
     cursor: pointer;
+}
+
+.no-data {
+    margin-top: 4em;
+    font-size: large;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.no-data > :first-child {
+    font-size: x-large;
 }
 
 .overview-grid {
@@ -66,7 +123,7 @@ header > .banner-item {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.6);
+    background-color: var(--overlay-bg);
     z-index: 100;
     display: flex;
     justify-content: center;
@@ -77,7 +134,8 @@ header > .banner-item {
     max-width: 90vw;
     padding: 1em 0 2em 0;
     height: auto;
-    background-color: white;
+    background-color: var(--card-bg);
+    /* color: var(--text); */
     border-radius: 16px;
     display: flex;
     flex-direction: column;
@@ -137,6 +195,11 @@ header > .banner-item {
     cursor: pointer;
 }
 
+.media-data > img,
+.media-data > video {
+    box-shadow: 0 0 6px var(--media-shadow);
+}
+
 @media only screen and (max-width: 576px) {
     .post-overlay-content {
         flex-wrap: wrap;
@@ -184,7 +247,7 @@ header > .banner-item {
 }
 @media only screen and (min-width: 1500px) {
     .post-overlay-frame {
-        max-width: 50vw;
+        max-width: 60vw;
     }
     .media-item {
         max-width: 500px;
@@ -210,6 +273,7 @@ header > .banner-item {
 }
 
 .stats {
+    margin-top: 6px;
     display: flex;
 }
 
@@ -243,4 +307,36 @@ header > .banner-item {
 
 .scroll-to-top:hover {
   background-color: skyblue; /* Add a dark-grey background on hover */
+}
+
+/* Scrollbar styling for overlay description and multi-media container */
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background-color: var(--scroll-track);
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: var(--scroll-track);
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: var(--scroll-track-active);
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: var(--scroll-thumb);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scroll-thumb-active);
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: var(--scroll-thumb-active);
 }

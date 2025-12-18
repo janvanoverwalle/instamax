@@ -38,6 +38,7 @@ function displayPost(post) {
 
     // document.title = document.title.split('-', 2)[0] + '- ' + (post.description ?? 'Post');
 
+    clearMedia();
     const albumPosts = findPostsFromSameAlbum(post.post_id);
     albumPosts.forEach((p) => displayMedia(p, false));
     const mediaData = document.querySelector('.media-data');

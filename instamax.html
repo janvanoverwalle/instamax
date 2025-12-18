@@ -25,35 +25,37 @@
                 <img src="assets/images/header-black.png" class="header-image clickable" alt="header-overview"
                     title="Instamax">
             </div>
-            <div class="banner-item">
-                <img src="assets/icons/sort-alpha-up.svg" class="sort-date" alt="sort-desc" title="Sort oldest first"
-                    width="32">
+            <div class="banner-item header-icons">
+                <img src="assets/icons/sort-alpha-up.svg" class="bs-icon sort-date" alt="sort-desc"
+                    title="Sort oldest first" width="32">
+                <img src="assets/icons/moon-stars-fill.svg" class="bs-icon theme-toggle clickable" alt="toggle-theme"
+                    title="Switch to dark mode" width="28">
             </div>
         </header>
         <div class="post-overlay-container d-none">
             <div class="post-overlay-frame">
                 <div class="close-overlay">
-                    <img src="assets/icons/x.svg" class="close-post-overlay" alt="close-post-overlay" title="Close"
-                        width="32">
+                    <img src="assets/icons/x.svg" class="bs-icon close-post-overlay" alt="close-post-overlay"
+                        title="Close" width="32">
                 </div>
                 <div class="post-overlay-content">
                     <div class="post-media">
                         <div class="media-content">
-                            <img src="assets/icons/chevron-left.svg" class="prev-post" title="Previous"
+                            <img src="assets/icons/chevron-left.svg" class="bs-icon prev-post" title="Previous"
                                 alt="previous-post" width="32">
                             <div class="media">
                                 <div class="media-data"></div>
                                 <div class="stats">
                                     <div class="likes">
                                         <span>
-                                            <img src="assets/icons/heart.svg" alt="likes">
+                                            <img src="assets/icons/heart.svg" class="bs-icon" alt="likes">
                                             <span class="amount-likes"></span>
                                             <span class="post-likes"></span>
                                         </span>
                                     </div>
                                     <div class="comments">
                                         <span>
-                                            <img src="assets/icons/chat.svg" alt="comments"
+                                            <img src="assets/icons/chat.svg" class="bs-icon" alt="comments"
                                                 style="padding-bottom: 2px;">
                                             <span class="amount-comments"></span>
                                             <span class="post-comments"></span>
@@ -62,8 +64,8 @@
                                 </div>
                                 <span class="post-date"></span>
                             </div>
-                            <img src="assets/icons/chevron-right.svg" class="next-post" title="Next" alt="next-post"
-                                width="32">
+                            <img src="assets/icons/chevron-right.svg" class="bs-icon next-post" title="Next"
+                                alt="next-post" width="32">
                         </div>
                     </div>
                     <div class="post-description">
@@ -72,7 +74,12 @@
                 </div>
             </div>
         </div>
-        <div class="overview-grid"></div>
+        <div class="no-data">
+            <span>There doesn't seem to be anything here.</span>
+            <span>Have you run the converter?</span>
+        </div>
+        <div class="overview-grid">
+        </div>
         <button class="scroll-to-top d-none">🡱</button>
     </div>
 </body>

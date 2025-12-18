@@ -6,6 +6,11 @@ function initOverview() {
         window.location.href = window.location.href.split('?')[0];
     });
 
+    if (POSTS_INFO.length > 0) {
+        document.querySelector('.no-data').classList.add('d-none');
+    }
+
+    clearOverview();
     sortPosts(getCurrentSortDirection());
     loadAdditionalPosts(60);
 
@@ -31,7 +36,7 @@ function initOverview() {
         e.target.setAttribute('title', 'Sort ' + (isAscending ? 'oldest' : 'newest') + ' first');
         e.target.setAttribute('src', 'assets/icons/sort-alpha-' + (isAscending ? 'up' : 'down') + '.svg');
 
-        document.querySelector('.overview-grid').replaceChildren();
+        clearOverview();
         loadAdditionalPosts(60);
     });
 
@@ -39,6 +44,10 @@ function initOverview() {
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     });
+}
+
+function clearOverview() {
+    document.querySelector('.overview-grid').replaceChildren();
 }
 
 function getCurrentSortDirection() {
