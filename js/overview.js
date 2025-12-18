@@ -6,6 +6,7 @@ function initOverview() {
         window.location.href = window.location.href.split('?')[0];
     });
 
+    console.log(POSTS_INFO.length + ' posts loaded.');
     if (POSTS_INFO.length > 0) {
         document.querySelector('.no-data').classList.add('d-none');
     }
