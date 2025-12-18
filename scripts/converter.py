@@ -17,11 +17,16 @@ VIDEO_DIR = DATA_DIR / 'videos'
 
 
 def main():
+    if (CURRENT_DIR / INPUT_FILE).exists() is False:
+        print(f'No files found to convert.\nPlace {INPUT_FILE} and media files in {CURRENT_DIR} and try again.')
+        input('Press Enter to exit...')
+        return
+
     print(f'Converting {INPUT_FILE} to {OUTPUT_FILE} and organizing media files...')
 
     print('Reading CSV data...', end='', flush=True)
     s = timeit.default_timer()
-    with open(CURRENT_DIR / INPUT_FILE, mode='r', encoding='utf-8') as csv_file:
+    with open(CURRENT_DIR / INPUT_FILE, mode='r', encoding='utf-8-sig') as csv_file:
         data = list(csv.DictReader(csv_file))
     e = timeit.default_timer()
     print(f'OK ({e - s:.2f} seconds)')
