@@ -52,13 +52,13 @@ Descriptions can be scrolled through if they are long enough. The same goes for 
 Just in case it becomes necessary, here are the steps needed to convert and move all the photos and videos to their proper place so that everything works.
 
 #### Windows
-1.  Have all the photos and videos, as well as the `csv`/`Excel` file that contains all the post information in the same folder as this.
-2.  Run the `converter.exe` program.
+1.  Have all the photos and videos, as well as the `csv`/`Excel` file that contains all the post information in the same folder as this (the `instamax` location).
+2.  Run the `converter.exe` program in the `scripts` folder.
 
 #### Mac / Linux
 1. Same as step 1 on Windows.
 2. Open a terminal window.
-    * !! Change the working directory to this location.
+    * !! Change the working directory to this location (the `instamax` location).
 3. Run this command: `python -m scripts\converter.py`
 
 If everything worked as it should, there should be a `data` folder containing an `images` folder (which houses all the photos) and a `videos` folder (which houses all the videos).
