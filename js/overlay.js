@@ -229,7 +229,7 @@ function displayDescription(description) {
 
 function highlightTags(description) {
     return description.replaceAll(/(#\S+)/g, (s) => {
-        return '<a href="overview.html?tag=' + s.slice(1) + '" class="tag">' + s + '</a>';
+        return '<a href="instamax.html?tag=' + s.slice(1) + '" class="tag">' + s + '</a>';
     });
 }
 
