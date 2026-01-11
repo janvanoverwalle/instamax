@@ -35,13 +35,11 @@ Clicking a photo or video opens that post.
 *   Posts marked with a ![album](assets/icons/files.svg "Album") icon consist of multiple photos and/or videos.
 
 ### Navigation
-
 Posts can be directly navigated using the ![left](assets/icons/chevron-left.svg "Left") or ![right](assets/icons/chevron-right.svg "Right") buttons, or by using the left and right arrow keys on your keyboard.
 
 They can be closed by clicking the ![close](assets/icons/x.svg "Close") button, hitting `Escape` on your keyboard, or clicking outside the post.
 
 ### Content
-
 Videos can be paused by clicking on them.
 *   If they have sound it will be automatically muted, but can unmuted by clicking the ![volume](assets/icons/volume-mute-fill.svg "Volume") button in the bottom right corner of the video.
 
@@ -72,5 +70,6 @@ There are 2 scripts included that can download the latest version of Instamax (i
 *   `updater.sh` is for Max / Linux.
 
 ## Backup
+Should you ever need or want it, a complete backup version of Instamax can be downloaded [here](https://mega.nz/file/c6wxEYza#QEqhX2_9Hzcxh1zz_dff2zbMWGxiFJmEoJfmRSTvU4w) or by scanning the QR code:
 
-Should you ever need or want it, a complete backup version of Instamax can be downloaded [here](https://mega.nz/file/c6wxEYza#QEqhX2_9Hzcxh1zz_dff2zbMWGxiFJmEoJfmRSTvU4w).
+![backup](assets/images/qr-backup.png "Backup")
