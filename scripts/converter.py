@@ -7,18 +7,21 @@ from pathlib import Path
 
 
 CURRENT_DIR = Path(os.getcwd()).resolve()
+PROJECT_DIR = CURRENT_DIR
+if PROJECT_DIR.name == 'scripts':
+    PROJECT_DIR = PROJECT_DIR.parent.resolve()
 
 INPUT_FILE = 'posts_info.csv'
 OUTPUT_FILE = 'posts-info.js'
 
-DATA_DIR = CURRENT_DIR / Path('data')
+DATA_DIR = PROJECT_DIR / Path('data')
 IMAGE_DIR = DATA_DIR / 'images'
 VIDEO_DIR = DATA_DIR / 'videos'
 
 
 def main():
-    if (CURRENT_DIR / INPUT_FILE).exists() is False:
-        print(f'No files found to convert.\nPlace {INPUT_FILE} and media files in {CURRENT_DIR} and try again.')
+    if (PROJECT_DIR / INPUT_FILE).exists() is False:
+        print(f'No files found to convert.\nPlace {INPUT_FILE} and media files in {PROJECT_DIR} and try again.')
         input('Press Enter to exit...')
         return
 
@@ -26,14 +29,14 @@ def main():
 
     print('Reading CSV data...', end='', flush=True)
     s = timeit.default_timer()
-    with open(CURRENT_DIR / INPUT_FILE, mode='r', encoding='utf-8-sig') as csv_file:
+    with open(PROJECT_DIR / INPUT_FILE, mode='r', encoding='utf-8-sig') as csv_file:
         data = list(csv.DictReader(csv_file))
     e = timeit.default_timer()
     print(f'OK ({e - s:.2f} seconds)')
 
     print(f'Writing JSON data to {OUTPUT_FILE}...', end='', flush=True)
     s = timeit.default_timer()
-    output_dir = CURRENT_DIR / DATA_DIR
+    output_dir = PROJECT_DIR / DATA_DIR
     output_dir.mkdir(parents=True, exist_ok=True)
     with open(output_dir / OUTPUT_FILE, mode='w', encoding='utf-8') as json_file:
         json_file.write('const POSTS_INFO = ')
@@ -43,8 +46,8 @@ def main():
 
     print('Organizing media files...', end='', flush=True)
     s = timeit.default_timer()
-    (CURRENT_DIR / INPUT_FILE).rename(DATA_DIR / INPUT_FILE)
-    for file in CURRENT_DIR.iterdir():
+    (PROJECT_DIR / INPUT_FILE).rename(DATA_DIR / INPUT_FILE)
+    for file in PROJECT_DIR.iterdir():
         if not file.is_file():
             continue
         if file.suffix.lower() in {'.jpg', '.jpeg', '.png', '.gif', '.mp4', '.mov'}:
