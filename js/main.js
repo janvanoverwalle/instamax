@@ -1,7 +1,6 @@
 window.onload = onWindowLoad;
 
 function onWindowLoad() {
-    // document.querySelector('.header-image').addEventListener('click', displayPreviousPost);
     initTheme();
 }
 
