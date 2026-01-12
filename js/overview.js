@@ -93,6 +93,7 @@ function createThumbnail(post, column) {
         mediaElement = document.createElement('video');
         mediaElement.autoplay = true;
         mediaElement.muted = true;
+        mediaElement.loop = true;
         mediaElement.appendChild(source);
         mediaElement.appendChild(text);
     }
