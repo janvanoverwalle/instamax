@@ -69,9 +69,9 @@ There are 2 scripts included that can download the latest version of Instamax (i
 *   `updater.bat` is for Windows.
 *   `updater.sh` is for Max / Linux.
 
-<!-- ## Backup
-Should you ever need or want it, a complete backup version of Instamax can be downloaded [here](https://mega.nz/folder/ZrJgTCyY#xe1VAnD5mjibR66pblvZnw) or by scanning the QR code:
+## Backup
+Should you ever need or want it, a complete backup version of Instamax can be downloaded [here](https://drive.google.com/file/d/1RgUURO5-dGE1BjZ-aH1OUETkzEOauIBI/view?usp=sharing) or by scanning the QR code:
 
 ![backup](assets/images/qr-backup.png "Backup")
 
-> NOTE: It is recommended to run the updater after downloading the backup to ensure you have the latest version of everything. -->
+> NOTE: It is recommended to run the updater after downloading the backup to ensure you have the latest version of everything.
