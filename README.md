@@ -18,8 +18,6 @@ Open `instamax.html` using your preferred browser (it should work on all modern 
     There doesn't seem to be anything here.
     Have you run the converter?
 
-<br>
-
 There are 3 buttons at the top:
 *   ![album](assets/images/header-black-minimal.png "album") always brings you back to the initial overview page.
 *   ![sorting](assets/icons/sort-alpha-down.svg "Sorting") is used to sort by upload date (newest or oldest first).
