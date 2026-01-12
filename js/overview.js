@@ -98,8 +98,12 @@ function createThumbnail(post, column) {
     }
     else {
         mediaElement = document.createElement('img');
-        mediaElement.setAttribute('src', 'data/images/' + post.filename);
-        mediaElement.setAttribute('alt', post.filename.split('.').slice(0, -1).join());
+        mediaElement.addEventListener('error', () => {
+            mediaElement.setAttribute('src', 'data/images/' + post.filename);
+        });
+        const basename = post.filename.split('.').slice(0, -1).join();
+        mediaElement.setAttribute('src', 'data/thumbnails/' + basename + '-thumb.webp');
+        mediaElement.setAttribute('alt', basename);
     }
 
     mediaElement.setAttribute('width', '100%');
