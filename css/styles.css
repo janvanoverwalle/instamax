@@ -130,7 +130,7 @@ header > .banner-item {
 }
 
 .post-overlay-frame {
-    max-width: 90vw;
+    max-width: 99vw;
     padding: 1em 0 2em 0;
     height: auto;
     background-color: var(--card-bg);
@@ -184,6 +184,7 @@ header > .banner-item {
 
 .post-description .description {
     overflow-y: auto;
+    overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     max-height: 50vh;
     padding-right: .5rem;
@@ -224,17 +225,11 @@ header > .banner-item {
     }
 }
 @media only screen and (min-width: 768px) {
-    .post-overlay-frame {
-        max-width: 80vw;
-    }
     .media-item {
         max-width: 300px;
     }
 }
 @media only screen and (min-width: 1025px) {
-    .post-overlay-frame {
-        max-width: 70vw;
-    }
     .media-item {
         max-width: 350px;
     .post-description .description {
@@ -243,17 +238,11 @@ header > .banner-item {
     }
 }
 @media only screen and (min-width: 1200px) {
-    .post-overlay-frame {
-        max-width: 60vw;
-    }
     .media-item {
         max-width: 400px;
     }
 }
 @media only screen and (min-width: 1500px) {
-    .post-overlay-frame {
-        max-width: 60vw;
-    }
     .media-item {
         max-width: 500px;
     }
