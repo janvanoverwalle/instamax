@@ -32,7 +32,7 @@ rm -rf assets css js scripts .gitignore README.md converter.exe instamax.html 2>
 echo "OK"
 
 printf "Preparing new files... "
-rm -rf "$SOURCE_DIR/.gitignore" "$SOURCE_DIR/updater.bat" "$SOURCE_DIR/updater.sh" 2>/dev/null
+rm -rf "$SOURCE_DIR/.gitignore" "$SOURCE_DIR/README.md" "$SOURCE_DIR/updater.bat" "$SOURCE_DIR/updater.sh" 2>/dev/null
 echo "OK"
 
 printf "Installing new files... "
