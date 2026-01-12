@@ -63,13 +63,15 @@ If everything worked as it should, there should be a `data` folder containing an
 The `csv`/`Excel` file should have been moved to the `data` folder as well, and there should also be a `posts-info.js` file now.
 
 ## Updates
-If there are ever any issues or errors or things that you want to have changed or added, you can contact me at [janvanoverwalle@gmail.com](mailto:janvanoverwalle@gmail.com).
+If there are ever any issues or errors or things that you want to have changed or added, you can contact me at [instamaxigram32@gmail.com](mailto:instamaxigram32@gmail.com).
 
 There are 2 scripts included that can download the latest version of Instamax (if there are any changes). This way it is possible for me to fix or improve anything in the future with as little hassle as possible for you.
 *   `updater.bat` is for Windows.
 *   `updater.sh` is for Max / Linux.
 
-## Backup
-Should you ever need or want it, a complete backup version of Instamax can be downloaded [here](https://mega.nz/file/c6wxEYza#QEqhX2_9Hzcxh1zz_dff2zbMWGxiFJmEoJfmRSTvU4w) or by scanning the QR code:
+<!-- ## Backup
+Should you ever need or want it, a complete backup version of Instamax can be downloaded [here](https://mega.nz/folder/ZrJgTCyY#xe1VAnD5mjibR66pblvZnw) or by scanning the QR code:
 
 ![backup](assets/images/qr-backup.png "Backup")
+
+> NOTE: It is recommended to run the updater after downloading the backup to ensure you have the latest version of everything. -->
