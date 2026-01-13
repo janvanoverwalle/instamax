@@ -76,16 +76,51 @@ function loadAdditionalPosts(numToLoad, start) {
     }
 }
 
+function setVideoIfExists(videoElement, src, fallbackSrc) {
+  const testVideo = document.createElement("video");
+
+  // Important: must set src *before* load()
+  testVideo.src = src;
+
+  testVideo.onloadedmetadata = () => {
+    // Video exists and is readable
+    videoElement.src = src;
+    videoElement.load();
+  };
+
+  testVideo.onerror = () => {
+    // Video does not exist or can't be loaded
+    videoElement.src = fallbackSrc;
+    videoElement.load();
+  };
+}
+
+function setImageIfExists(imgElement, url, fallbackUrl) {
+  const testImage = new Image();
+
+  testImage.onload = function () {
+    imgElement.src = url; // Image exists
+  };
+
+  testImage.onerror = function () {
+    imgElement.src = fallbackUrl; // Image does not exist
+  };
+
+  testImage.src = url;
+}
+
 function createThumbnail(post, column) {
     const albumIdentifier = getAlbumIdentifier(post.post_id);
     if (document.querySelector('.thumbnail-container.p' + albumIdentifier)) {
         return;
     }
 
+    const basename = post.filename.split('.').slice(0, -1).join();
+
     let mediaElement;
     if (post.filename.endsWith('.mp4')) {
         const source = document.createElement('source');
-        source.setAttribute('src', 'data/videos/' + post.filename);
+        // source.setAttribute('src', 'data/videos/' + post.filename);
         source.setAttribute('type', 'video/mp4');
 
         const text = document.createTextNode('Your browser does not support the video tag.');
@@ -96,15 +131,15 @@ function createThumbnail(post, column) {
         mediaElement.loop = true;
         mediaElement.appendChild(source);
         mediaElement.appendChild(text);
+
+        setVideoIfExists(mediaElement, 'data/videos/thumbnails/' + basename + '-thumb.mp4', 'data/videos/' + post.filename);
     }
     else {
         mediaElement = document.createElement('img');
-        mediaElement.addEventListener('error', () => {
-            mediaElement.setAttribute('src', 'data/images/' + post.filename);
-        });
-        const basename = post.filename.split('.').slice(0, -1).join();
-        mediaElement.setAttribute('src', 'data/thumbnails/' + basename + '-thumb.webp');
+        // mediaElement.setAttribute('src', 'data/images/' + post.filename);
         mediaElement.setAttribute('alt', basename);
+
+        setImageIfExists(mediaElement, 'data/images/thumbnails/' + basename + '-thumb.webp', 'data/images/' + post.filename);
     }
 
     mediaElement.setAttribute('width', '100%');
