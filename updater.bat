@@ -56,9 +56,8 @@ echo OK
 
 <nul set /p =Preparing new files...
 del /f /q "%SOURCE_DIR%\.gitignore" 2>nul
-del /f /q "%SOURCE_DIR%\README.md" 2>nul
-del /f /q "%SOURCE_DIR%\updater.bat" 2>nul
-del /f /q "%SOURCE_DIR%\updater.sh" 2>nul
+del /f /q "%SOURCE_DIR%\*.md" 2>nul
+del /f /q "%SOURCE_DIR%\updater.*" 2>nul
 echo OK
 
 <nul set /p =echo Installing new files...
