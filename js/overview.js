@@ -109,18 +109,33 @@ function setImageIfExists(imgElement, url, fallbackUrl) {
   testImage.src = url;
 }
 
+function replaceFilenameIfNecessary(filename) {
+    const replaceMap = {
+        '2023-11-11_3233600303491110946': '2023-11-11_3233600303490941574',
+    };
+
+    for (const [key, value] of Object.entries(replaceMap)) {
+        if (filename.includes(key)) {
+            return value + '.' + filename.split('.').pop(); // Keep original extension
+        }
+    }
+
+    return filename;
+}
+
 function createThumbnail(post, column) {
     const albumIdentifier = getAlbumIdentifier(post.post_id);
     if (document.querySelector('.thumbnail-container.p' + albumIdentifier)) {
         return;
     }
 
-    const basename = post.filename.split('.').slice(0, -1).join();
+    const filename = replaceFilenameIfNecessary(post.filename);
+    const basename = filename.split('.').slice(0, -1).join();
 
     let mediaElement;
-    if (post.filename.endsWith('.mp4')) {
+    if (filename.endsWith('.mp4')) {
         const source = document.createElement('source');
-        // source.setAttribute('src', 'data/videos/' + post.filename);
+        // source.setAttribute('src', 'data/videos/' + filename);
         source.setAttribute('type', 'video/mp4');
 
         const text = document.createTextNode('Your browser does not support the video tag.');
@@ -132,14 +147,14 @@ function createThumbnail(post, column) {
         mediaElement.appendChild(source);
         mediaElement.appendChild(text);
 
-        setVideoIfExists(mediaElement, 'data/videos/thumbnails/' + basename + '-thumb.mp4', 'data/videos/' + post.filename);
+        setVideoIfExists(mediaElement, 'data/videos/thumbnails/' + basename + '-thumb.mp4', 'data/videos/' + filename);
     }
     else {
         mediaElement = document.createElement('img');
-        // mediaElement.setAttribute('src', 'data/images/' + post.filename);
+        // mediaElement.setAttribute('src', 'data/images/' + filename);
         mediaElement.setAttribute('alt', basename);
 
-        setImageIfExists(mediaElement, 'data/images/thumbnails/' + basename + '-thumb.webp', 'data/images/' + post.filename);
+        setImageIfExists(mediaElement, 'data/images/thumbnails/' + basename + '-thumb.webp', 'data/images/' + filename);
     }
 
     mediaElement.setAttribute('width', '100%');
