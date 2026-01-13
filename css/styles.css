@@ -168,7 +168,6 @@ header > .banner-item {
 .media-data.multi {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    max-height: 50vh;
     padding-right: .5rem;
     display: flex;
     flex-direction: column;
@@ -186,8 +185,26 @@ header > .banner-item {
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
-    max-height: 50vh;
     padding-right: .5rem;
+}
+
+.media-data.multi,
+.post-description .description {
+    max-height: 60vh;
+}
+
+@media only screen and (max-height: 960px) {
+    .media-data.multi,
+    .post-description .description {
+        max-height: 70vh;
+    }
+}
+
+@media only screen and (min-height: 1200px) {
+    .media-data.multi,
+    .post-description .description {
+        max-height: 50vh;
+    }
 }
 
 .post-navigation {
