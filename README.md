@@ -21,9 +21,9 @@ Open `instamax.html` using your preferred browser (it should work on all modern 
 There are 3 buttons at the top of the overview page:
 *   ![album](assets/images/header-black-minimal.png "Album") always brings you back to the initial overview page.
 *   ![sorting](assets/icons/sort-alpha-down.svg "Sorting") is used to sort by upload date (newest or oldest first).
-*   ![light-theme](assets/icons/sun-fill.svg "Light theme") or ![dark-theme](assets/icons/moon-stars-fill.svg "Dark theme") is used for switching the theme (light or dark). This automatically tries to match with your computer's theme.
+*   ![light-theme](assets/icons/sun-fill.svg "Light theme") or ![dark-theme](assets/icons/moon-stars-fill.svg "Dark theme") is used for switching the theme (light or dark). This automatically tries to match your computer's theme.
 
-You can scroll through the overview, more posts will be loaded as you scroll down.
+You can scroll through the overview; more posts will be loaded as you scroll down.
 
 Once you scroll down a bit, a button will appear in the bottom right corner that will bring you back to the top of the page.
 
@@ -39,7 +39,7 @@ They can be closed by clicking the ![close](assets/icons/x.svg "Close") button (
 
 ### Content
 Videos can be paused by clicking on them.
-*   If they have sound it will be automatically muted, but can unmuted by clicking the ![volume](assets/icons/volume-mute-fill.svg "Volume") button in the bottom right corner of the video.
+*   If they have sound it will be automatically muted but can unmuted by clicking the ![volume](assets/icons/volume-mute-fill.svg "Volume") button in the bottom right corner of the video.
 
 Descriptions can be scrolled through if they are long enough. The same goes for posts consisting of multiple photos or videos.
 *   Tags in descriptions can be clicked to view all posts with that tag.
